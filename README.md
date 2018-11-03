@@ -33,7 +33,7 @@ The HTTPS server is running on port 5001
 ## Verify API sanity
 
 1. Jump to your application for testing REST APIs
-2. POST/GET requests to `localhost:3000`
+2. POST/GET requests to `localhost:3000/hello`
 3. Verify the following output
 ```json
 {
