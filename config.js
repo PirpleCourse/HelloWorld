@@ -6,10 +6,16 @@ module.exports = (function() {
   envCreator(envs, 'staging', 3000, 3001);
   envCreator(envs, 'production', 5000, 5001);
 
+  // Return the Chosen environment amongst the current environments
   return chosenEnv(envs);
 
+
+  ////////////////////
+  ///Private Functions
+  ////////////////////
+
   /**
-   * A private helper method to help create an environment
+   * An Impure function to help create an environment
    * @param object: The current env object to expand on
    * @param name: String: name of the environment, stage, prod. etc.
    *            NOTE: the name of the env is also mapped as an `envName` key.
@@ -22,7 +28,7 @@ module.exports = (function() {
   }
 
   /**
-   * A private method that determines which
+   * A pure function that determines which
    * environment will be used for the application
    *  NOTE: The Chosen environment will always default to Staging
    * @return Object: The chosen environment from the `envs` object
