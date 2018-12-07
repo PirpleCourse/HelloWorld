@@ -1,11 +1,15 @@
 # HelloWorld
-Homework Assignment #1 Hello World API
+Homework Assignment #1 + #6 Hello World API
 
 
 ## Prerequisite Requirements
 
 * It should be a RESTful JSON API that listens on a port of your choice
 * When someone posts anything to the route /hello, you should return a welcome message, in JSON format. This message can be anything you want.
+
+## HOMEWORK No.6. Use all Cores via cluster
+### Proof
+<img width="754" alt="screen shot 2018-12-07 at 1 16 52 pm" src="https://user-images.githubusercontent.com/18662248/49644960-d984ef00-fa22-11e8-8504-c4da413526df.png">
 
 
 ## Local Development/Testing
