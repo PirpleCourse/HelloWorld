@@ -4,34 +4,28 @@ var url = require('url');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-
-// Read SSL certs
-var httpsServerOptions = {
-  'key': fs.readFileSync('./https/key.pem'),
-  'cert': fs.readFileSync('./https/cert.pem')
-};
-
-// Instantiate HTTP servers
-var httpServer = http.createServer(unifiedServer);
-
-// Start the HTTP server
-httpServer.listen(config.httpPort,function(){
-  console.log('\x1b[37mThe HTTP server is running on port '+config.httpPort);
-});
+var cluster = require('cluster');
+var os = require('os');
 
 try {
-  var httpsServer = https.createServer(httpsServerOptions, unifiedServer);
 
-  // Start the HTTPS server
-  httpsServer.listen(config.httpsPort,function(){
-   console.log('The HTTPS server is running on port '+config.httpsPort);
-  });
+  if (cluster.isMaster) {
+    // Fork the process
+    for(var i = 0; i < os.cpus().length; i++){
+      cluster.fork();
+    }
+  } else {
+    // Instantiate HTTP servers
+    var httpServer = http.createServer(unifiedServer);
+
+    // Start the HTTP server
+    httpServer.listen(config.httpPort,function(){
+      console.log('\x1b[37mThe HTTP server is running on port '+config.httpPort);
+    });
+  }
 } catch(e) {
   console.log('\x1b[31mHTTPS Server not created, ensure your Permission keys exist and verified');
 }
-
-
-
 
 
 // All the server logic for both the http and https server
